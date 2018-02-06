@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="bootstrap-custom/dist/css/bootstrap.css" />
+		<link rel="stylesheet" href="daterange/daterangepicker.css" />
+		<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+		<script type="text/javascript" src="js/moment.js"></script>
+		<script type="text/javascript" src="bootstrap-custom/dist/js/bootstrap.js"></script>
+		<script type="text/javascript" src="daterange/daterangepicker.js"></script>
+	</head>
+
+	<body>
+		<div class="daterangepicker dropdown-menu ltr opensright show-calendar" style="top: 215px; left: 0px; right: auto; display: block;">
+			<div class="ranges">
+				<ul>
+					<li data-range-key="今天" class="">今天</li>
+					<li data-range-key="昨天" class="">昨天</li>
+					<li data-range-key="过去7天" class="">过去7天</li>
+					<li data-range-key="过去30天" class="">过去30天</li>
+					<li data-range-key="本月" class="">本月</li>
+					<li data-range-key="上月" class="">上月</li>
+					<li data-range-key="今年" class="">今年</li>
+					<li data-range-key="选择范围" class="active">选择范围</li>
+				</ul>
+				<div class="range_inputs"><button class="applyBtn btn btn-sm btn-success" type="button">确定</button> <button class="cancelBtn btn btn-sm btn-default" type="button">取消</button></div>
+			</div>
+			<div class="calendar left">
+				<div class="daterangepicker_input"><input class="input-mini form-control active" type="text" name="daterangepicker_start" value=""><i class="fa fa-calendar glyphicon glyphicon-calendar"></i>
+					<div class="calendar-time">
+						<div>
+							<select class="hourselect">
+								<option value="0" selected="selected">0</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+								<option value="7">7</option>
+								<option value="8">8</option>
+								<option value="9">9</option>
+								<option value="10">10</option>
+								<option value="11">11</option>
+								<option value="12">12</option>
+								<option value="13">13</option>
+								<option value="14">14</option>
+								<option value="15">15</option>
+								<option value="16">16</option>
+								<option value="17">17</option>
+								<option value="18">18</option>
+								<option value="19">19</option>
+								<option value="20">20</option>
+								<option value="21">21</option>
+								<option value="22">22</option>
+								<option value="23">23</option>
+							</select> :
+							<select class="minuteselect">
+								<option value="0" selected="selected">00</option>
+								<option value="1">01</option>
+								<option value="2">02</option>
+								<option value="3">03</option>
+								<option value="4">04</option>
+								<option value="5">05</option>
+								<option value="6">06</option>
+								<option value="7">07</option>
+								<option value="8">08</option>
+								<option value="9">09</option>
+								<option value="10">10</option>
+								<option value="11">11</option>
+								<option value="12">12</option>
+								<option value="13">13</option>
+								<option value="14">14</option>
+								<option value="15">15</option>
+								<option value="16">16</option>
+								<option value="17">17</option>
+								<option value="18">18</option>
+								<option value="19">19</option>
+								<option value="20">20</option>
+								<option value="21">21</option>
+								<option value="22">22</option>
+								<option value="23">23</option>
+								<option value="24">24</option>
+								<option value="25">25</option>
+								<option value="26">26</option>
+								<option value="27">27</option>
+								<option value="28">28</option>
+								<option value="29">29</option>
+								<option value="30">30</option>
+								<option value="31">31</option>
+								<option value="32">32</option>
+								<option value="33">33</option>
+								<option value="34">34</option>
+								<option value="35">35</option>
+								<option value="36">36</option>
+								<option value="37">37</option>
+								<option value="38">38</option>
+								<option value="39">39</option>
+								<option value="40">40</option>
+								<option value="41">41</option>
+								<option value="42">42</option>
+								<option value="43">43</option>
+								<option value="44">44</option>
+								<option value="45">45</option>
+								<option value="46">46</option>
+								<option value="47">47</option>
+								<option value="48">48</option>
+								<option value="49">49</option>
+								<option value="50">50</option>
+								<option value="51">51</option>
+								<option value="52">52</option>
+								<option value="53">53</option>
+								<option value="54">54</option>
+								<option value="55">55</option>
+								<option value="56">56</option>
+								<option value="57">57</option>
+								<option value="58">58</option>
+								<option value="59">59</option>
+							</select>
+						</div><i class="fa fa-clock-o glyphicon glyphicon-time"></i></div>
+				</div>
+				<div class="calendar-table">
+					<table class="table-condensed">
+						<thead>
+							<tr>
+								<th class="prev available"><i class="fa fa-chevron-left glyphicon glyphicon-chevron-left"></i></th>
+								<th colspan="5" class="month">
+									<select class="monthselect">
+										<option value="0" selected="selected">一月</option>
+										<option value="1">二月</option>
+										<option value="2">三月</option>
+										<option value="3">四月</option>
+										<option value="4">五月</option>
+										<option value="5">六月</option>
+										<option value="6">七月</option>
+										<option value="7">八月</option>
+										<option value="8">九月</option>
+										<option value="9">十月</option>
+										<option value="10">十一月</option>
+										<option value="11">十二月</option>
+									</select>
+									<select class="yearselect">
+										<option value="1967">1967</option>
+										<option value="1968">1968</option>
+										<option value="1969">1969</option>
+										<option value="1970">1970</option>
+										<option value="1971">1971</option>
+										<option value="1972">1972</option>
+										<option value="1973">1973</option>
+										<option value="1974">1974</option>
+										<option value="1975">1975</option>
+										<option value="1976">1976</option>
+										<option value="1977">1977</option>
+										<option value="1978">1978</option>
+										<option value="1979">1979</option>
+										<option value="1980">1980</option>
+										<option value="1981">1981</option>
+										<option value="1982">1982</option>
+										<option value="1983">1983</option>
+										<option value="1984">1984</option>
+										<option value="1985">1985</option>
+										<option value="1986">1986</option>
+										<option value="1987">1987</option>
+										<option value="1988">1988</option>
+										<option value="1989">1989</option>
+										<option value="1990">1990</option>
+										<option value="1991">1991</option>
+										<option value="1992">1992</option>
+										<option value="1993">1993</option>
+										<option value="1994">1994</option>
+										<option value="1995">1995</option>
+										<option value="1996">1996</option>
+										<option value="1997">1997</option>
+										<option value="1998">1998</option>
+										<option value="1999">1999</option>
+										<option value="2000">2000</option>
+										<option value="2001">2001</option>
+										<option value="2002">2002</option>
+										<option value="2003">2003</option>
+										<option value="2004">2004</option>
+										<option value="2005">2005</option>
+										<option value="2006">2006</option>
+										<option value="2007">2007</option>
+										<option value="2008">2008</option>
+										<option value="2009">2009</option>
+										<option value="2010">2010</option>
+										<option value="2011">2011</option>
+										<option value="2012">2012</option>
+										<option value="2013">2013</option>
+										<option value="2014">2014</option>
+										<option value="2015">2015</option>
+										<option value="2016">2016</option>
+										<option value="2017" selected="selected">2017</option>
+										<option value="2018">2018</option>
+										<option value="2019">2019</option>
+										<option value="2020">2020</option>
+										<option value="2021">2021</option>
+										<option value="2022">2022</option>
+									</select>
+								</th>
+								<th></th>
+							</tr>
+							<tr>
+								<th>一</th>
+								<th>二</th>
+								<th>三</th>
+								<th>四</th>
+								<th>五</th>
+								<th>六</th>
+								<th>日</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="off available" data-title="r0c0">26</td>
+								<td class="off available" data-title="r0c1">27</td>
+								<td class="off available" data-title="r0c2">28</td>
+								<td class="off available" data-title="r0c3">29</td>
+								<td class="off available" data-title="r0c4">30</td>
+								<td class="weekend off available" data-title="r0c5">31</td>
+								<td class="weekend available" data-title="r0c6">1</td>
+							</tr>
+							<tr>
+								<td class="available" data-title="r1c0">2</td>
+								<td class="available" data-title="r1c1">3</td>
+								<td class="available" data-title="r1c2">4</td>
+								<td class="available" data-title="r1c3">5</td>
+								<td class="available" data-title="r1c4">6</td>
+								<td class="weekend available" data-title="r1c5">7</td>
+								<td class="weekend available" data-title="r1c6">8</td>
+							</tr>
+							<tr>
+								<td class="available" data-title="r2c0">9</td>
+								<td class="available" data-title="r2c1">10</td>
+								<td class="available" data-title="r2c2">11</td>
+								<td class="available" data-title="r2c3">12</td>
+								<td class="available" data-title="r2c4">13</td>
+								<td class="weekend available" data-title="r2c5">14</td>
+								<td class="weekend available" data-title="r2c6">15</td>
+							</tr>
+							<tr>
+								<td class="available" data-title="r3c0">16</td>
+								<td class="available" data-title="r3c1">17</td>
+								<td class="available" data-title="r3c2">18</td>
+								<td class="available" data-title="r3c3">19</td>
+								<td class="active start-date available" data-title="r3c4">20</td>
+								<td class="weekend in-range available" data-title="r3c5">21</td>
+								<td class="weekend in-range available" data-title="r3c6">22</td>
+							</tr>
+							<tr>
+								<td class="in-range available" data-title="r4c0">23</td>
+								<td class="in-range available" data-title="r4c1">24</td>
+								<td class="in-range available" data-title="r4c2">25</td>
+								<td class="in-range available" data-title="r4c3">26</td>
+								<td class="in-range available" data-title="r4c4">27</td>
+								<td class="weekend in-range available" data-title="r4c5">28</td>
+								<td class="weekend in-range available" data-title="r4c6">29</td>
+							</tr>
+							<tr>
+								<td class="in-range available" data-title="r5c0">30</td>
+								<td class="in-range available" data-title="r5c1">31</td>
+								<td class="off in-range available" data-title="r5c2">1</td>
+								<td class="off in-range available" data-title="r5c3">2</td>
+								<td class="off in-range available" data-title="r5c4">3</td>
+								<td class="weekend off in-range available" data-title="r5c5">4</td>
+								<td class="weekend off in-range available" data-title="r5c6">5</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="calendar right">
+				<div class="daterangepicker_input"><input class="input-mini form-control" type="text" name="daterangepicker_end" value=""><i class="fa fa-calendar glyphicon glyphicon-calendar"></i>
+					<div class="calendar-time">
+						<div>
+							<select class="hourselect">
+								<option value="0">0</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+								<option value="7">7</option>
+								<option value="8">8</option>
+								<option value="9">9</option>
+								<option value="10">10</option>
+								<option value="11">11</option>
+								<option value="12">12</option>
+								<option value="13">13</option>
+								<option value="14">14</option>
+								<option value="15">15</option>
+								<option value="16">16</option>
+								<option value="17">17</option>
+								<option value="18">18</option>
+								<option value="19">19</option>
+								<option value="20">20</option>
+								<option value="21">21</option>
+								<option value="22">22</option>
+								<option value="23" selected="selected">23</option>
+							</select> :
+							<select class="minuteselect">
+								<option value="0">00</option>
+								<option value="1">01</option>
+								<option value="2">02</option>
+								<option value="3">03</option>
+								<option value="4">04</option>
+								<option value="5">05</option>
+								<option value="6">06</option>
+								<option value="7">07</option>
+								<option value="8">08</option>
+								<option value="9">09</option>
+								<option value="10">10</option>
+								<option value="11">11</option>
+								<option value="12">12</option>
+								<option value="13">13</option>
+								<option value="14">14</option>
+								<option value="15">15</option>
+								<option value="16">16</option>
+								<option value="17">17</option>
+								<option value="18">18</option>
+								<option value="19">19</option>
+								<option value="20">20</option>
+								<option value="21">21</option>
+								<option value="22">22</option>
+								<option value="23">23</option>
+								<option value="24">24</option>
+								<option value="25">25</option>
+								<option value="26">26</option>
+								<option value="27">27</option>
+								<option value="28">28</option>
+								<option value="29">29</option>
+								<option value="30">30</option>
+								<option value="31">31</option>
+								<option value="32">32</option>
+								<option value="33">33</option>
+								<option value="34">34</option>
+								<option value="35">35</option>
+								<option value="36">36</option>
+								<option value="37">37</option>
+								<option value="38">38</option>
+								<option value="39">39</option>
+								<option value="40">40</option>
+								<option value="41">41</option>
+								<option value="42">42</option>
+								<option value="43">43</option>
+								<option value="44">44</option>
+								<option value="45">45</option>
+								<option value="46">46</option>
+								<option value="47">47</option>
+								<option value="48">48</option>
+								<option value="49">49</option>
+								<option value="50">50</option>
+								<option value="51">51</option>
+								<option value="52">52</option>
+								<option value="53">53</option>
+								<option value="54">54</option>
+								<option value="55">55</option>
+								<option value="56">56</option>
+								<option value="57">57</option>
+								<option value="58">58</option>
+								<option value="59" selected="selected">59</option>
+							</select>
+						</div><i class="fa fa-clock-o glyphicon glyphicon-time"></i></div>
+				</div>
+				<div class="calendar-table">
+					<table class="table-condensed">
+						<thead>
+							<tr>
+								<th></th>
+								<th colspan="5" class="month">
+									<select class="monthselect">
+										<option value="0">一月</option>
+										<option value="1" selected="selected">二月</option>
+										<option value="2">三月</option>
+										<option value="3">四月</option>
+										<option value="4">五月</option>
+										<option value="5">六月</option>
+										<option value="6">七月</option>
+										<option value="7">八月</option>
+										<option value="8">九月</option>
+										<option value="9">十月</option>
+										<option value="10">十一月</option>
+										<option value="11">十二月</option>
+									</select>
+									<select class="yearselect">
+										<option value="2017" selected="selected">2017</option>
+										<option value="2018">2018</option>
+										<option value="2019">2019</option>
+										<option value="2020">2020</option>
+										<option value="2021">2021</option>
+										<option value="2022">2022</option>
+									</select>
+								</th>
+								<th class="next available"><i class="fa fa-chevron-right glyphicon glyphicon-chevron-right"></i></th>
+							</tr>
+							<tr>
+								<th>一</th>
+								<th>二</th>
+								<th>三</th>
+								<th>四</th>
+								<th>五</th>
+								<th>六</th>
+								<th>日</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="off in-range available" data-title="r0c0">30</td>
+								<td class="off in-range available" data-title="r0c1">31</td>
+								<td class="in-range available" data-title="r0c2">1</td>
+								<td class="in-range available" data-title="r0c3">2</td>
+								<td class="in-range available" data-title="r0c4">3</td>
+								<td class="weekend in-range available" data-title="r0c5">4</td>
+								<td class="weekend in-range available" data-title="r0c6">5</td>
+							</tr>
+							<tr>
+								<td class="in-range available" data-title="r1c0">6</td>
+								<td class="in-range available" data-title="r1c1">7</td>
+								<td class="in-range available" data-title="r1c2">8</td>
+								<td class="in-range available" data-title="r1c3">9</td>
+								<td class="in-range available" data-title="r1c4">10</td>
+								<td class="weekend in-range available" data-title="r1c5">11</td>
+								<td class="weekend in-range available" data-title="r1c6">12</td>
+							</tr>
+							<tr>
+								<td class="in-range available" data-title="r2c0">13</td>
+								<td class="in-range available" data-title="r2c1">14</td>
+								<td class="in-range available" data-title="r2c2">15</td>
+								<td class="in-range available" data-title="r2c3">16</td>
+								<td class="in-range available" data-title="r2c4">17</td>
+								<td class="weekend in-range available" data-title="r2c5">18</td>
+								<td class="weekend in-range available" data-title="r2c6">19</td>
+							</tr>
+							<tr>
+								<td class="in-range available" data-title="r3c0">20</td>
+								<td class="active end-date in-range available" data-title="r3c1">21</td>
+								<td class="available" data-title="r3c2">22</td>
+								<td class="available" data-title="r3c3">23</td>
+								<td class="available" data-title="r3c4">24</td>
+								<td class="weekend available" data-title="r3c5">25</td>
+								<td class="weekend available" data-title="r3c6">26</td>
+							</tr>
+							<tr>
+								<td class="available" data-title="r4c0">27</td>
+								<td class="available" data-title="r4c1">28</td>
+								<td class="off available" data-title="r4c2">1</td>
+								<td class="off available" data-title="r4c3">2</td>
+								<td class="off available" data-title="r4c4">3</td>
+								<td class="weekend off available" data-title="r4c5">4</td>
+								<td class="weekend off available" data-title="r4c6">5</td>
+							</tr>
+							<tr>
+								<td class="off available" data-title="r5c0">6</td>
+								<td class="off available" data-title="r5c1">7</td>
+								<td class="off available" data-title="r5c2">8</td>
+								<td class="off available" data-title="r5c3">9</td>
+								<td class="off available" data-title="r5c4">10</td>
+								<td class="weekend off available" data-title="r5c5">11</td>
+								<td class="weekend off available" data-title="r5c6">12</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>

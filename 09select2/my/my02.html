@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../dist/css/select2.css">
+		<script src="../../js/jquery-2.0.3.js"></script>
+		<script src="../dist/js/select2.full.js"></script>
+		<script>
+			window.log=console.log;
+			$(function() {
+				//例2:ajax
+				var currpage = 1;
+				$("#c02-select").select2({
+					ajax: {
+						//若要指定select2宽度,直接在html中style中写
+						url: "data.json",
+						dataType: 'json',
+						delay: 250,
+						data: function(term) {
+							debugger;
+							return {
+								//查询参数(params.term表示输入框中的内容,q表示发送到服务器的参数名)
+								//q: params.term,
+								//发送http://127.0.0.1:8020/cj/09select2/dist/data.json?text=2
+								text: term,
+								pagesize: 5,
+								page: currpage
+							};
+						},
+						processResults: function(res) {
+							currpage++;
+							return {
+								//results为最终的数据,如data.result
+								results: res,
+								pagination: {
+									more: res
+								}
+							};
+						},
+						cache: true
+					},
+					escapeMarkup: function(markup) {
+						return markup;
+					},
+					//最少需要输入多少个字符才进行查询
+					minimumInputLength: 1,
+					//返回结果回调函数
+					templateResult: formatRepo,
+					//选中项回调
+					templateSelection: formatRepoSelection
+				});
+				
+				//绑定事件
+				//打开下拉框
+				$("#c02-select").on("select2:open",function(e){
+					log("select2:open事件");
+				});
+				//关闭下拉框
+				$("#c02-select").on("select2:close",function(e){
+					log("select2:close事件");
+				});
+				//选中
+				$("#c02-select").on("select2:select",function(e){
+					log("select2:select事件");
+				});
+				$("#c02-select").on("select2:unselect",function(e){
+					log("select2:unselect事件");
+				});
+				
+				
+				//==================================
+				var data = [{
+					id:"-1000",
+					text:"无id"
+				},{
+					id: 0,
+					text: 'enhancement'
+				}, {
+					id: 1,
+					text: 'bug'
+				}, {
+					id: 2,
+					text: 'duplicate'
+				}, {
+					id: 3,
+					text: 'invalid'
+				}, {
+					id: 4,
+					text: 'wontfix'
+				}];
+				
+				$("#select2").select2({
+					data: data,
+					placeholder: '请选择',
+					allowClear: true
+				});
+				//触发select2的赋值,清空 事件
+				$("#btn1").click(function(){
+					$("#select2").val(2).trigger("change");
+				});
+				$("#btn2").click(function(){
+					$("#select2").val(null).trigger("change");
+				});
+				//==========================
+				$("#select3").select2({
+					//该选项 允许select2选中的是用户输入的文字,而不需要在下拉选中存在
+					tags:true,
+					data: data
+				});
+				
+				//==========================
+				//自定义结果如何匹配
+				$("#select4").select2({
+					matcher:matchStart,
+					data: data
+				});
+				
+				/**
+				 * @param {Object} searchObj 搜索框中的搜索条件
+				 * @param {Object} data 当前选择的文本
+				 */
+				function matchStart(searchObj,data){
+					debugger;
+					var text=data.text;
+					var term=searchObj.term;
+					if(text.toUpperCase().indexOf(term.toUpperCase())==0){
+						return true;
+					}
+					return false;
+				}
+				
+				//==========================
+				//其他自定义选项
+				/*$("#select5").select2({
+					//下拉关闭时,突出显示 选择结果
+					selectOnClose: true,
+					//选择结果时,阻止下拉关闭
+					//closeOnSelect: false,
+					data:data
+				});*/
+				
+				//向标签添加额外属性
+				/*$('#select5').select2({
+				  createTag: function (params) {
+				    var term = "A";
+				    if (term === '') {
+				      return null;
+				    }
+				
+				    return {
+				      id: term,
+				      text: term,
+				      //添加 额外选项
+				      newTag: true // add additional parameters
+				    }
+				  }
+				});*/
+			});
+
+			var formatRepo = function(data) {
+				return data.text + "哈哈";
+			}
+			var formatRepoSelection = function(data) {
+				return data + "呵呵";
+			}
+			
+		</script>
+	</head>
+
+	<body>
+		事件(看控制台输出):<select id="c02-select" style="width:300px"></select><br>
+		<select id="select2" style="width:300px"></select>
+		<button id="btn1">赋值</button><button id="btn2">清空</button><br>
+		tag<select id="select3" style="width:300px"></select><br>
+		自定义搜索条件<select id="select4" style="width:300px"></select><br>
+		其他选项<select id="select5" style="width:300px"></select><br>
+	</body>
+
+</html>

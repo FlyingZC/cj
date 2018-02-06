@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/jquery-2.0.3.js"></script>
+		<script src="dist/jquery.mockjax.js"></script>
+		<script>
+			$(function() {
+				//设置参数
+			/*	$.mockjaxSettings = {
+					logging: true,
+					status: 200,
+					statusText: "OK",
+					responseTime: 500,
+					isTimeout: false,
+					throwUnmocked: false,
+					contentType: 'text/plain',
+					response: '',
+					responseText: '',
+					responseXML: '',
+					proxy: '',
+					proxyType: 'GET',
+					lastModified: null,
+					etag: '',
+					headers: {
+						etag: 'IJF@H#@923uf8023hFO@I#H#',
+						'content-type': 'text/plain'
+					}
+				};*/
+
+				//它会监测具有相同 url 的 Ajax 请求,并在请求发出时拦截同时模拟响应, responseText 的值就是模拟的响应内容
+				$.mockjax({
+					//url支持正则
+					url: '/products.do',
+					/*data: { action: "foo" },*/
+					responseText: {name:'zxxx'}	
+				});
+
+				//解除模拟
+				//$.mockjax.clear();
+
+				//真正发送请求时,照样能获取数据.该数据由mockjax提供
+				var url = '/products.do';
+				$.getJSON(url, function(data) {
+					$('body').append(data.name);
+				});
+			});
+		</script>
+	</head>
+
+	<body>
+	</body>
+
+</html>

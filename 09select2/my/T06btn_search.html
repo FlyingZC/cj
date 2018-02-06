@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<!--<link rel="stylesheet" href="../dist/css/select2.css">-->
+		<script src="../../js/jquery-2.0.3.js"></script>
+		<!--<script src="../dist/js/select2.full.js"></script>-->
+		
+		<link rel="stylesheet" href="../dist/js/efwk.css">
+		<!--<script src="../dist/js/select2-cvm.full.js"></script>-->
+		<script src="../dist/js/select2-cvm-modify.full.js"></script>
+		
+		<script>
+			window.log = console.log;
+			$(function() {
+				$("#tag").select2({
+					placeholder: '输入关键字',
+					allowClear: true,
+					//使用搜索按钮需要配置allowSearchBth这个配置项
+					allowSearchBth:'#searchBth',
+					matcher: function(params, data) {
+						console.log('matcher...');
+					},
+					ajax: {
+						url: "data.json",
+						dataType: 'json',
+						cache: true,
+						delay: 250,
+						data: function(params) {
+							console.log('ajax....data');
+							return {
+								id: params.term, // search term
+								page: params.page //第几页返回查询
+							};
+						},
+						processResults: function(data, params) { //结果处理
+							params.page = params.page || 1;
+							return {
+								//results: (new Function("return " + data.items))(),
+								results: data,
+								pagination: {
+									//more: (params.page * 30) < data.total_count //每页30条数据
+								}
+							}
+						}
+					}
+				});
+
+				//绑定事件
+				//打开下拉框
+				$("#tag").on("select2:open", function(e) {
+					log("select2:open事件");
+					if(!$(this).val()) {
+
+					}
+				}).on("select2:close", function(e) { //关闭下拉框
+					log("select2:close事件");
+				}).on("select2:select", function(e) { //选中
+					log("select2:select事件");
+				}).on("select2:unselect", function(e) {
+					log("select2:unselect事件");
+				});
+				//清空Select2控件的值.也可以这么对select2赋值
+				//$("#PID").select2("val", "");
+
+			});
+
+			var a = function() {
+				//若某个option存在,则选中.若不存在,则添加并选中
+				// Set the value, creating a new option if necessary
+				if($('#mySelect2').find("option[value='" + data.id + "']").length) {
+					$('#mySelect2').val(data.id).trigger('change');
+				} else {
+					// Create a DOM Option and pre-select by default
+					var newOption = new Option(data.text, data.id, true, true);
+					// Append it to the select
+					$('#mySelect2').append(newOption).trigger('change');
+				}
+			}
+
+			var b = function() {
+				//选中
+				$('#mySelect2').val('1'); // Select the option with a value of '1'
+				$('#mySelect2').trigger('change');
+			}
+
+			var c = function() {
+				//触发select2事件
+				// manually trigger the `select2:select` event
+				studentSelect.trigger({
+					type: 'select2:select',
+					params: {
+						data: data
+					}
+				});
+			}
+			
+			$("#searchLi").click(function(event){
+				alert('aa');
+				event.preventDefault();
+				event.stopPropagation();
+			});
+		</script>
+	</head>
+
+	<body>
+		<select id="tag" style="width:300px">
+			<!--<option value="-1000">请选择</option>-->
+		</select>
+		<button id="searchBth">触发select2搜索</button>
+		<button id="searchBth">测试按钮</button>
+		<input type="button" value="点我"/>
+		<span id="searchLi">aa</span>
+	</body>
+
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/jquery-2.0.3.js"></script>
+		<script type="text/javascript" src="source/jquery.fancybox.pack.js?v=2.1.5"></script>
+		<link rel="stylesheet" type="text/css" href="source/jquery.fancybox.css?v=2.1.5" media="screen" />
+
+		<script>
+			$(function() {
+				//将图片包裹在a里,将a添加fancybox的class
+				$('.fancybox').fancybox();
+			});
+		</script>
+	</head>
+
+	<body>
+		<a class="fancybox" href="demo/1_b.jpg" data-fancybox-group="gallery" title="Lorem ipsum dolor sit amet">
+			<img src="demo/1_s.jpg" alt="" />
+		</a>
+		<a class="fancybox" href="demo/1_b.jpg" data-fancybox-group="gallery" title="Lorem ipsum dolor sit amet">
+			<img src="demo/1_s.jpg" alt="" />
+		</a>
+	</body>
+
+</html>

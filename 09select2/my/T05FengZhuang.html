@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../dist/css/select2.css">
+		<script src="../../js/jquery-2.0.3.js"></script>
+		<script src="../dist/js/select2.full.js"></script>
+		<script>
+			$(function() {
+				select2Use($("#select2Container"), 'pageData2.json', 'systemCode',{'age':12});
+			});
+			/**
+			 * @param {Object} select2Container select2容器的jQuery对象
+			 * @param {Object} ajaxUrl 请求后台
+			 * @param {Object} keyword 后台接收的请求参数的key
+			 */
+			var select2Use = function(select2Container, ajaxUrl, keyword,otherReqData) {
+				$(select2Container).select2({
+					placeholder: "请选择",
+					ajax: {
+						url: ajaxUrl,
+						dataType: 'json',
+						delay: 250, // 延迟显示
+						//data用于向后台发送的请求参数
+						data: function(params) {
+							var requestData = {
+								//keyword: params.term, // 搜索框内输入的内容
+								currPage: params.page, // 第几页，分页
+								pageSize: 10
+							};
+							requestData[keyword] = params.term;
+							if(otherReqData instanceof Object) {
+								for(var key in otherReqData) {
+									requestData[key] = otherReqData[key];
+								}
+							}
+							return {
+								"head": {},
+								"content": requestData
+							};
+						},
+						// 分页,select查询返回结果.
+						processResults: function(res, params) {
+							//在第一次请求时没有params.page属性,所以初始化为1
+							params.page = params.page || 1;
+							//可以在此对后台返回的数据转换成select所需的id,text格式				
+							/*if(res.success) {
+								var users = res.result.data;
+								var options = [];
+								for(var i = 0, len = users.length; i < len; i++) {
+									var option = {
+										"id": users[i]["userId"],
+										"text": (users[i]["departmentName"] + " " + users[i]["realName"] + " " + users[i]["position"])
+									};
+									options.push(option);
+								}
+							}*/
+							return {
+								results: res.data, // 后台返回的数据集
+								//下拉触发分页查询的条件
+								pagination: {
+									more: params.page < res.totalPages
+								}
+							};
+						},
+						cache: false
+					},
+					escapeMarkup: function(markup) {
+						return markup;
+					},
+					//minimumInputLength: 1 // 最少输入一个字符才开始检索
+					//允许用户 清空选择
+					allowClear: true
+				});
+			}
+		</script>
+	</head>
+
+	<body>
+		<select id="select2Container" style="width:300px">
+			
+		</select>
+	</body>
+
+</html>

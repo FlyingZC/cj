@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../media/css/jquery.dataTables.css">
+		<script src="../../js/jquery-2.0.3.js"></script>
+		<script type="text/javascript" language="javascript" src="../media/js/jquery.dataTables.js">
+		</script>
+		<script>
+			//使用数组做datatable的数据源
+			var data = [
+				[
+					"Tiger Nixon",
+					"System Architect",
+					"Edinburgh",
+					"5421",
+					"2011/04/25",
+					"$3,120"
+				],
+				[
+					"Garrett Winters",
+					"Director",
+					"Edinburgh",
+					"8422",
+					"2011/07/25",
+					"$5,300"
+				]
+			];
+			$(function() {
+				//然后 DataTables 这样初始化：
+				$('#example').DataTable({
+					data: data
+				});
+
+			});
+		</script>
+	</head>
+
+	<body>
+		<table id="example">
+			<thead>
+				<tr>
+					<th>Column 1</th>
+					<th>Column 2</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Row 1 Data 1</td>
+					<td>Row 1 Data 2</td>
+				</tr>
+				<tr>
+					<td>Row 2 Data 1</td>
+					<td>Row 2 Data 2</td>
+				</tr>
+			</tbody>
+		</table>
+	</body>
+
+</html>

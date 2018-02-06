@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/jquery-2.0.3.js"></script>
+		<script src="api/echarts.js"></script>
+		<script>
+			$(function() {
+				var myChart = echarts.init(document.getElementById('main'));
+				//初始化x轴的第一个 "日期" 坐标
+				var base = +new Date(2014, 9, 3);
+				//x轴日期 坐标 每次递增 一天
+				var oneDay = 24 * 3600 * 1000;
+
+				//用作x轴 显示 的 date"日期"数组
+				var date = [];
+				//用作y轴 显示 的data "随机数"  数组
+				var data = [Math.random() * 150];
+				var now = new Date(base);
+
+				for(var i = 1; i < 100; i++) {
+					addData();
+				}
+
+				/**
+				 * 当 不传入shift(即false),时 初始化创建x轴y轴数据
+				 * 当 传入 shift时,将 x轴y轴数据分别移动一次(将 两个数组中的元素均左移一位)
+				 * @param {Object} shift
+				 */
+				function addData(shift) {
+					//创建 类似于 2015/7/11 的字符串
+					now = [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/');
+					date.push(now);
+					data.push((Math.random() - 0.4) * 10 + data[data.length - 1]);
+
+					if(shift) {
+						date.shift();
+						data.shift();
+					}
+
+					now = new Date(+new Date(now) + oneDay);
+				}
+
+				option = {
+					xAxis: {
+						type: 'category',
+						boundaryGap: false,
+						data: date
+					},
+					yAxis: {
+						boundaryGap: [0, '50%'],
+						type: 'value'
+					},
+					series: [{
+						name: '成交',
+						type: 'line',
+						smooth: true,
+						symbol: 'none',
+						stack: 'a',
+						areaStyle: {
+							normal: {}
+						},
+						data: data
+					}]
+				};
+
+				setInterval(function() {//每过0.5秒 刷新一次
+					addData(true);
+					myChart.setOption({
+						xAxis: {
+							data: date
+						},
+						series: [{
+							name: '成交',
+							data: data
+						}]
+					});
+				}, 500);
+
+				myChart.setOption(option);
+			});
+		</script>
+	</head>
+
+	<body>
+		<div style="width:600px;height:600px" id="main"></div>
+	</body>
+
+</html>

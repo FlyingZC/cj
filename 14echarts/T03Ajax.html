@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>ajax异步加载echarts数据</title>
+		<script src="../js/jquery-2.0.3.js"></script>
+		<script src="api/echarts.js"></script>
+		<script>
+			$(function() {
+				//只要通过 jQuery 等工具异步获取数据后通过 setOption 填入数据和配置项就行
+				//1.先 创建 空的图
+				var myChart = echarts.init(document.getElementById('main'));
+				// 显示标题，图例和空的坐标轴
+				myChart.setOption({
+					title: {
+						text: '异步数据加载示例'
+					},
+					tooltip: {},
+					legend: {
+						data: ['销量']
+					},
+					xAxis: {
+						data: []
+					},
+					yAxis: {},
+					series: [{
+						//!!!推荐该name和以下ajax返回数据后设置的series中的name相同
+						name: '销量',
+						type: 'bar',
+						data: []
+					}]
+				});
+
+				// 2.异步加载数据
+				myChart.showLoading();//显示loading动画
+				setTimeout(function(){
+					$.get('data.json', function(data) {
+						//隐藏loading动画
+						myChart.hideLoading();
+						// 填入数据
+						myChart.setOption({
+							xAxis: {//该数组 作为x轴上显示的坐标
+								data: data.categories
+							},
+							series: [{
+								// 根据名字对应到相应的系列
+								name: '销量',
+								////该数组 用于填充 数据
+								data: data.data
+							}]
+						});
+					}, 'json');
+				},'2000');
+
+			});
+		</script>
+	</head>
+
+	<body>
+		<div style="width:600px;height:600px" id="main"></div>
+	</body>
+
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../css/jquery.fullPage.css">
+		<script src="../js/jquery-1.8.3.min.js"></script>
+		<!-- jquery.easings.min.js 用于 easing 参数，也可以使用完整的 jQuery UI 代替，如果不需要设置 easing 参数，可去掉改文件 -->
+		<!--<script src="js/jquery.easings.min.js"></script>-->
+
+		<!-- 如果 scrollOverflow 设置为 true，则需要引入 jquery.slimscroll.min.js，一般情况下不需要 -->
+		<!--<script src="js/jquery.slimscroll.min.js"></script>-->
+		<script src="../js/jquery.fullPage.js"></script>
+		<script>
+			$(function() {
+				$('#dowebok').fullpage();
+			});
+		</script>
+	</head>
+
+	<body>
+		<div id="dowebok">
+			<div class="section">
+				<h3>第一屏</h3>
+			</div>
+			<div class="section">
+				<h3>第二屏</h3>
+			</div>
+			<div class="section">
+				<div class="slide">第三屏的第一屏</div>
+				<div class="slide">第三屏的第二屏</div>
+				<div class="slide">第三屏的第三屏</div>
+				<div class="slide">第三屏的第四屏</div>
+			</div>
+			<div class="section">
+				<h3>第四屏</h3>
+			</div>
+		</div>
+	</body>
+
+</html>

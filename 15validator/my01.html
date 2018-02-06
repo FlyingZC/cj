@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/jquery-2.0.3.js"></script>
+		<script src="validator.js"></script>
+		<script>
+			$(function(){
+				$("input[required],select[.required]").blur(function(){
+					validator.checkField;
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<form id="myForm">
+			<input type="text" required="required"/><br>
+			<select class="required">
+				<option>opt1</option>
+			</select>
+		</form>
+	</body>
+</html>

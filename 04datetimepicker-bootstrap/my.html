@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../css/bootstrap3/css/bootstrap.css" />
+
+		<script src="../js/jquery-2.0.3.js"></script>
+		<script type="text/javascript" src="../css/bootstrap3/js/bootstrap.js"></script>
+		<script src="bootstrap-datetimepicker/bootstrap-datetimepicker.js"></script>
+		<link rel="stylesheet" href="../18fontAwesome/Font-Awesome-3.2.1/css/font-awesome.css">
+		<script>
+			$(function() {
+				$("#d1").datetimepicker({
+					format: 'yyyy-mm-dd',
+					startDate: '2017-11-11', //选择器的开始日期
+					autoclose: true, //日期选择完成后是否关闭选择框
+					bootcssVer: 3, //显示向左向右的箭头
+					language: 'zh-CN', //语言
+					minView: "month", //表示日期选择的最小范围，默认是hour
+					fontAwesome:true
+				});
+			});
+		</script>
+	</head>
+
+	<body>
+		<input id="d1" />
+	</body>
+
+</html>

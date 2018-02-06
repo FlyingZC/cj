@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>先加事件,再添加到页面,看能否成功</title>
+		<link rel="stylesheet" href="bootstrap-custom/dist/css/bootstrap.css" />
+		<link rel="stylesheet" href="daterange/daterangepicker.css" />
+		<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+		<script type="text/javascript" src="js/moment.js"></script>
+		<script type="text/javascript" src="bootstrap-custom/dist/js/bootstrap.js"></script>
+		<script type="text/javascript" src="daterange/daterangepicker.js"></script>
+		<script>
+			$(function(){
+				//可以
+				var input1 = $('<input type="text" />');
+				input1.daterangepicker();
+				input1.appendTo($('body'));
+				
+				var input2 = $('<input type="text" />');
+				var options ={parentEl : '#d1'};
+				input2.daterangepicker(options);
+				input2.appendTo($('#d2'));
+			});
+		</script>
+	</head>
+	<body>
+		<div id="d1">
+			<div id='d2'></div>
+		</div>
+	</body>
+</html>

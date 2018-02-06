@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../../css/bootstrap3/css/bootstrap.css" />
+		<script src="../../js/jquery-2.0.3.js"></script>
+		<script type="text/javascript" src="../../css/bootstrap3/js/bootstrap.js"></script>
+		<script src="../common.js"></script>
+		<script src="my-paginator.js"></script>
+		<script>
+			$(function() {
+				var page = product.alias(efwk.common.paginator);
+				var paginator1 = page.api({
+					"currPage" : 1,
+					"pageSize" : 20,
+					"totalRecords" : 1000
+				});
+				
+				var paginator2 = page.api({
+					"currPage" : 5,
+					"pageSize" : 40,
+					"totalRecords" : 1000
+				});
+				
+				console.log(paginator1);
+				console.log(paginator2);
+			});
+		</script>
+	</head>
+
+	<body>
+		<ul id="page" style="text-align: center;margin-top: 50px;margin-left: 50px;"></ul>
+	</body>
+
+</html>

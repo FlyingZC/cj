@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>自适应大小</title>
+		<script src="../js/jquery-2.0.3.js"></script>
+		<script src="api/echarts.js"></script>
+		<script>
+			$(function() {
+						var myChart = echarts.init(document.getElementById('main'));
+						option = {
+							baseOption: { // 这里是基本的『原子option』。
+								title: { ... },
+								legend: { ... },
+								series: [{ ... }, { ... }, ...],
+								...
+							},
+							media: [ // 这里定义了 media query 的逐条规则。
+								{
+									//baseOption 是必然被使用的，此外，满足了某个 query 条件时，对应的 option 会被使用 chart.mergeOption() 来 merge 进去。
+									query: {
+										minWidth: 200,
+										maxHeight: 300,
+										minAspectRatio: 1.3
+									}, // 这里写规则。
+									option: { // 这里写此规则满足下的option。
+										legend: { ... },
+										series: [{
+												radius: [20, '50%'],
+												center: ['50%', '30%']
+											},
+											{
+												radius: [30, '50%'],
+												center: ['50%', '70%']
+											}
+										]
+									}
+								},
+								{
+									query: { ... }, // 第二个规则。
+									option: { // 第二个规则对应的option。
+										legend: { ... },
+										...
+									}
+								},
+								{ // 这条里没有写规则，表示『默认』，
+									option: { // 即所有规则都不满足时，采纳这个option。
+										legend: {
+											right: 10, // legend 放置在右侧中间。
+											top: '15%',
+											orient: 'vertical' // 纵向布局。
+										},
+										series: [ // 两个饼图上下布局。
+											{
+												radius: [20, '50%'],
+												center: ['50%', '30%']
+											},
+											{
+												radius: [30, '50%'],
+												center: ['50%', '75%']
+											}
+										}
+									}
+								]
+							};
+							myChart.setOption(option);
+
+						});
+		</script>
+	</head>
+
+	<body>
+		<div style="width:600px;height:600px" id="main"></div>
+	</body>
+
+</html>

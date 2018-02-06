@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>饼图 设置echarts样式</title>
+		<script src="../js/jquery-2.0.3.js"></script>
+		<script src="api/echarts.js"></script>
+		<script>
+			$(function() {
+				var myChart = echarts.init(document.getElementById('main'));
+				//饼图不需要xAxis,yAxis
+				myChart.setOption({
+					//设置 全局 背景色 针对所有图
+					backgroundColor: '#2c343c',
+					/*textStyle: { //设置 全局 字体颜色 ,针对 所有图
+						color: 'rgba(255, 255, 255, 0.3)'
+					},*/
+					series: [{ //在这里面 代表 一幅图
+						name: '访问来源',
+						type: 'pie', //使用type指定 为饼图
+						radius: '55%',
+						data: [{
+								value: 235,
+								name: '视频广告',
+								itemStyle: { //单独 为 一个扇形 指定样式
+									normal: {
+										color: '#c23531'
+									}
+								}
+							},
+							{ value: 274, name: '联盟广告' },
+							{ value: 310, name: '邮件营销' },
+							{ value: 335, name: '直接访问' },
+							{ value: 400, name: '搜索引擎' }
+						],
+
+						//roseType:'angle'//使得饼图 成为 '南丁格尔图'
+						itemStyle: { //设置echarts样式,注意 该属性在series属性里
+							normal: { //normal是 正常显示下 的样式
+								// 阴影的大小
+								shadowBlur: 200,
+								// 阴影水平方向上的偏移
+								shadowOffsetX: 0,
+								// 阴影垂直方向上的偏移
+								shadowOffsetY: 0,
+								// 阴影颜色
+								shadowColor: 'rgba(0, 0, 0, 0.5)',
+								// 设置扇形的颜色
+								/*color: '#c23531',
+								shadowBlur: 200,
+								shadowColor: 'rgba(0, 0, 0, 0.5)'*/
+							},
+							emphasis: { //鼠标hover时的高亮样式
+								shadowBlur: 200,
+								shadowColor: 'rgba(0, 0, 0, 0.5)'
+							}
+						},
+						label: { //单独 设置 一幅图 的字体样式
+							normal: {
+								textStyle: {
+									color: 'rgba(255, 255, 255, 0.3)'
+								}
+							}
+						},
+						visualMap: {//显示 明暗关系
+							// 不显示 visualMap 组件，只用于明暗度的映射
+							show: false,
+							// 映射的最小值为 80
+							min: 80,
+							// 映射的最大值为 600
+							max: 600,
+							inRange: {
+								// 明暗度的范围是 0 到 1
+								colorLightness: [0, 1]
+							}
+						}
+					}]
+				})
+			});
+		</script>
+	</head>
+
+	<body>
+		<div style="width:600px;height:600px" id="main"></div>
+	</body>
+
+</html>

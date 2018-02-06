@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../media/css/jquery.dataTables.css">
+		<script src="../../js/jquery-2.0.3.js"></script>
+		<script type="text/javascript" language="javascript" src="../media/js/jquery.dataTables.js">
+		</script>
+		<script>
+			$(document).ready(function() {
+				var table = $('#table_id_example').DataTable({
+					//这样配置后，即可用DatableTable的API来访问表格数据(DOM中原有的表格数据)
+					columns: [
+					//第一列数据命名为column1,第二列数据命名为column2
+					//使用table.row('.selected').data().column1来获取column1属性 数据
+						{ data: "column1" },
+						{ data: "column2" }
+					]
+				});
+				
+				//给行绑定选中事件,添加"selected"样式
+				$('#table_id_example tbody').on('click', 'tr', function() {
+					if($(this).hasClass('selected')) {
+						$(this).removeClass('selected');
+					} else {
+						table.$('tr.selected').removeClass('selected');
+						$(this).addClass('selected');
+					}
+				});
+				
+				//给按钮绑定点击事件
+				$("#table_id_example_button").click(function() {
+					//table为var table = $('#table_id_example').DataTable(...)返回的对象
+					var column1 = table.row('.selected').data().column1;
+					var column2 = table.row('.selected').data().column2;
+					alert("第一列内容：" + column1 + "；第二列内容： " + column2);
+				});
+			});
+		</script>
+	</head>
+
+	<body>
+		<button id="table_id_example_button">获取选中的行</button>
+		<table id="table_id_example" class="display">
+			<thead>
+				<tr>
+					<th>Column 1</th>
+					<th>Column 2</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Row 1 Data 1</td>
+					<td>Row 1 Data 2</td>
+				</tr>
+				<tr>
+					<td>Row 2 Data 1</td>
+					<td>Row 2 Data 2</td>
+				</tr>
+			</tbody>
+		</table>
+	</body>
+
+</html>

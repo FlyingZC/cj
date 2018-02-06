@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/jquery-2.0.3.js"></script>
+		<script src="api/echarts.js"></script>
+		<script>
+			$(function() {
+				var myChart = echarts.init(document.getElementById('main'));
+				// 指定图表的配置项和数据
+				var option = {
+					title: {
+						text: 'ECharts 入门示例'
+					},
+					tooltip: { //提示信息
+
+					},
+					legend: { //说明
+						data: ['销量']
+					},
+					xAxis: { //x轴
+						data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+					},
+					yAxis: {},
+					series: [{ //系列,代表一副图
+						name: '销量',
+						type: 'bar',
+						data: [5, 20, 36, 10, 10, 20]
+					}]
+				};
+				myChart.setOption(option);
+
+				myChart.on('click', function(params) {
+					console.log(params);
+					// 控制台打印数据(行)的名称
+					console.log(params.name);
+				});
+				
+				
+			});
+		</script>
+	</head>
+
+	<body>
+		<div style="width:600px;height:600px" id="main"></div>
+	</body>
+
+</html>

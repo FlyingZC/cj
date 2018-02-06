@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>日期范围选择测试页</title>
+		<link rel="stylesheet" href="bootstrap-custom/dist/css/bootstrap.css" />
+		<link rel="stylesheet" href="daterange/daterangepicker.css" />
+		<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+		<script type="text/javascript" src="js/moment.js"></script>
+		<script type="text/javascript" src="bootstrap-custom/dist/js/bootstrap.js"></script>
+		<script type="text/javascript" src="daterange/daterangepicker.js"></script>
+	</head>
+
+	<body>
+		日期范围选择<br>
+		<input id="test" style="width: 300px;"><br>
+		<br> 单组选择Single Date Picker<br>
+		<input id="test2" style="width: 300px;">
+	
+		<br> 
+		不带任何条件<input id="test3" style="width: 300px;"><br>
+		<!-- 日期时间范围选择代码 -->
+		<div class="box">
+			<label for="datePicker">双日历,且时间可以选择每一分钟</label>
+			<input type="text" name="datePicker" class="datePicker" id="datePicker">
+		</div>
+		<!-- 日期时间选择代码 -->
+		<div class="box">
+			<label for="singledatePicker">单日历</label>
+			<input type="text" name="singledatePicker" class="singledatePicker" id="singledatePicker">
+		</div>
+		<!-- 两个单日历实现日期时间范围选择代码 -->
+		<div class="box">
+			<label for="from">从</label>
+			<input type="text" name="from" class="from" id="from">
+			<label for="to">到</label>
+			<input type="text" name="to" class="to" id="to">
+		</div>
+		<!-- 不使用input,用div实现代码 -->
+		<div class="divDateSelect" id="divDateSelect">
+			<i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+			<span></span> <b class="caret"></b>
+		</div>
+
+	</body>
+	<script type="text/javascript">
+		$(document).ready(
+			function() {
+				var options = {
+					timePicker: true,//时间	
+					timePicker24Hour: true,
+					//timePickerSeconds: true,//在timePicker中显示秒数
+					timePickerIncrement: 1,//时间选取下拉框中时间增长区间间隔,如间隔5秒
+					showDropdowns:true//年份和月份选择框
+				};
+
+				options.locale = {
+					format: 'YYYY-MM-DD HH:mm',
+					separator: '至',
+					applyLabel: '确定',
+					cancelLabel: '取消',
+					fromLabel: '从',
+					toLabel: '到',
+					customRangeLabel: '选择范围',
+					daysOfWeek: ['日', '一', '二', '三', '四', '五', '六'],
+					monthNames: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+					firstDay: 1,
+					alwaysShowCalendars: true
+				};
+				$('#test').daterangepicker(options,
+					function(start, end, label) {
+						console.log(start.format('YYYY-MM-DD HH:mm') +
+							'|' + end.format('YYYY-MM-DD HH:mm'));
+					});
+
+				//2.single picker
+				var options2 = {
+					singleDatePicker: true
+				}
+				$("#test2").daterangepicker(options2, function(start, end, label) {
+
+				});
+				
+				//3.不带任何条件
+				$("#test3").daterangepicker();
+				
+				//========================3
+				$('input[name="datePicker"]').daterangepicker({
+					timePicker: true, //显示时间
+					timePicker24Hour: true, //时间制
+					timePickerSeconds: true, //时间选取到每分钟
+					startDate: moment().hours(0).minutes(0).seconds(0), //设置开始日期
+					endDate: moment(new Date()), //设置结束器日期
+					maxDate: moment(new Date()), //设置最大日期
+					"opens": "center",
+					
+					ranges: {//预定义的日期范围选择项
+						// '今天': [moment(), moment()],
+						'昨天': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+						'上周': [moment().subtract(6, 'days'), moment()],
+						'前30天': [moment().subtract(29, 'days'), moment()],
+						'本月': [moment().startOf('month'), moment().endOf('month')],
+						'上月': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+					},
+					showWeekNumbers: true,
+					locale: {
+						format: "YYYY-MM-DD HH:mm:ss", //设置显示格式
+						applyLabel: '确定', //确定按钮文本
+						cancelLabel: '取消', //取消按钮文本
+						customRangeLabel: '自定义',
+						daysOfWeek: ['日', '一', '二', '三', '四', '五', '六'],
+						monthNames: ['一月', '二月', '三月', '四月', '五月', '六月',
+							'七月', '八月', '九月', '十月', '十一月', '十二月'
+						],
+						firstDay: 1
+					},
+				}, function(start, end, label) {
+					timeRangeChange = [start.format('YYYY-MM-DD HH:mm:ss'), end.format('YYYY-MM-DD HH:mm:ss')];
+					console.log(timeRangeChange);
+				});
+
+				//================================4
+				$('input[name="singledatePicker"]').daterangepicker({
+					"autoApply": true, //选择日期后自动提交;只有在不显示时间的时候起作用timePicker:false
+					singleDatePicker: true, //单日历
+					showDropdowns: true, //年月份下拉框
+					timePicker: true, //显示时间
+					timePicker24Hour: true, //时间制
+					timePickerSeconds: true, //时间显示到秒
+					startDate: moment().hours(0).minutes(0).seconds(0), //设置开始日期
+					maxDate: moment(new Date()), //设置最大日期
+					"opens": "center",
+					showWeekNumbers: true,
+					locale: {
+						format: "YYYY-MM-DD HH:mm:ss", //设置显示格式
+						applyLabel: '确定', //确定按钮文本
+						cancelLabel: '取消', //取消按钮文本
+						daysOfWeek: ['日', '一', '二', '三', '四', '五', '六'],
+						monthNames: ['一月', '二月', '三月', '四月', '五月', '六月',
+							'七月', '八月', '九月', '十月', '十一月', '十二月'
+						],
+						firstDay: 1
+					},
+				}, function(start) {
+					console.log(start.format('YYYY-MM-DD HH:mm:ss'));
+				});
+
+				//================================5
+				var minDate = null;
+				var max = null;
+
+				function fromDate(maxDate) {
+					if(!maxDate) {
+						max = moment(new Date())
+					} else {
+						max = maxDate;
+					}
+					$('input[name="from"]').daterangepicker({
+						"autoApply": true, //选择日期后自动提交;只有在不显示时间的时候起作用timePicker:false
+						singleDatePicker: true, //单日历
+						showDropdowns: true, //年月份下拉框
+						timePicker: true, //显示时间
+						timePicker24Hour: true, //时间制
+						timePickerSeconds: true, //时间显示到秒
+						// startDate: moment().hours(0).minutes(0).seconds(0), //设置开始日期
+						maxDate: max, //设置最大日期
+						"opens": "center",
+						showWeekNumbers: true,
+						locale: {
+							format: "YYYY-MM-DD HH:mm:ss", //设置显示格式
+							applyLabel: '确定', //确定按钮文本
+							cancelLabel: '取消', //取消按钮文本
+							daysOfWeek: ['日', '一', '二', '三', '四', '五', '六'],
+							monthNames: ['一月', '二月', '三月', '四月', '五月', '六月',
+								'七月', '八月', '九月', '十月', '十一月', '十二月'
+							],
+							firstDay: 1
+						},
+					}, function(s) {
+						toDate(s);
+					});
+				}
+				fromDate()
+
+				function toDate(minDate) {
+					$('input[name="to"]').daterangepicker({
+						"autoApply": true, //选择日期后自动提交;只有在不显示时间的时候起作用timePicker:false
+						singleDatePicker: true, //单日历
+						showDropdowns: true, //年月份下拉框
+						timePicker: true, //显示时间
+						timePicker24Hour: true, //时间制
+						timePickerSeconds: true, //时间显示到秒
+						// startDate: moment().hours(0).minutes(0).seconds(0), //设置开始日期
+						maxDate: moment(new Date()), //设置最大日期
+						minDate: minDate,
+						"opens": "center",
+						showWeekNumbers: true,
+						locale: {
+							format: "YYYY-MM-DD HH:mm:ss", //设置显示格式
+							applyLabel: '确定', //确定按钮文本
+							cancelLabel: '取消', //取消按钮文本
+							daysOfWeek: ['日', '一', '二', '三', '四', '五', '六'],
+							monthNames: ['一月', '二月', '三月', '四月', '五月', '六月',
+								'七月', '八月', '九月', '十月', '十一月', '十二月'
+							],
+							firstDay: 1
+						},
+					}, function(s) {
+						fromDate(s)
+					});
+				}
+				toDate();
+
+				///===========================6
+				var start = moment(new Date());
+
+				function cb(start) {
+					$('#divDateSelect span').html(start.format('YYYY-MM-DD HH:mm:ss'));
+				}
+				$('#divDateSelect').daterangepicker({
+					"autoApply": true, //选择日期后自动提交;只有在不显示时间的时候起作用timePicker:false
+					singleDatePicker: true, //单日历
+					showDropdowns: true, //年月份下拉框
+					// timePicker: true, //显示时间
+					timePicker24Hour: true, //时间制
+					timePickerSeconds: true, //时间显示到秒
+					startDate: moment().hours(0).minutes(0).seconds(0), //设置开始日期
+					maxDate: moment(new Date()), //设置最大日期
+					"opens": "center",
+					showWeekNumbers: true,
+					locale: {
+						format: "YYYY-MM-DD HH:mm:ss", //设置显示格式
+						applyLabel: '确定', //确定按钮文本
+						cancelLabel: '取消', //取消按钮文本
+						daysOfWeek: ['日', '一', '二', '三', '四', '五', '六'],
+						monthNames: ['一月', '二月', '三月', '四月', '五月', '六月',
+							'七月', '八月', '九月', '十月', '十一月', '十二月'
+						],
+						firstDay: 1
+					},
+				}, cb);
+				cb(start);
+
+			}
+		);
+	</script>
+
+</html>

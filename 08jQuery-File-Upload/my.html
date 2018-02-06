@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../css/bootstrap3/css/bootstrap.css">
+		<link rel="stylesheet" href="css/jquery.fileupload.css">
+		<link rel="stylesheet" href="css/jquery.fileupload-ui.css">
+		
+		<script src="../js/jquery-2.0.3.js"></script>
+		<script src="js/vendor/jquery.ui.widget.js"></script>
+		<script src="js/jquery.iframe-transport.js"></script>
+		<!-- The basic File Upload plugin -->
+		<script src="js/jquery.fileupload.js"></script>
+		<script>
+			$(function() {
+				$('#fileupload').fileupload({
+					url:'',
+					dataType: 'json',
+					done: function(e, data) {
+						console.log("upload完成");
+						$.each(data.result.files, function(index, file) {
+							$('<p/>').text(file.name).appendTo(document.body);
+						});
+					},
+					//默认自动上传
+					autoUpload:true,
+					//允许上传的文件类型
+					acceptFileTypes: /(\.|\/)(gif|jpe?g|png|xlsx)$/i,
+					//最大上传文件大小,单位B
+					maxFileSize:999000,
+					//图片预览区的最大宽度
+					previewMaxWidth :300,
+					//进度条
+					progressall: function(e, data) {
+						var progress = parseInt(data.loaded / data.total * 100, 10);
+						//显示进度条的容器
+						$('#progress .bar').css(
+							'width',
+							progress + '%'
+						);
+					}
+				});
+			});
+		</script>
+
+	</head>
+
+	<body>
+		<input id="fileupload" type="file" name="file[]" multiple>
+		<!--2显示进度条-->	
+		<div id="progress">
+			<div class="bar" style="width: 0%;"></div>
+		</div>
+	</body>
+
+</html>

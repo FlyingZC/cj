@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>柱状图</title>
+		<script src="../js/jquery-2.0.3.js"></script>
+		<script src="api/echarts.js"></script>
+		<script>
+			$(function() {
+				//2.echarts.init()初始化一个echarts实例,并通过setOption生成一个简单的图形
+				// 基于准备好的dom，初始化echarts实例
+				var myChart = echarts.init(document.getElementById('main'));
+
+				// 指定图表的配置项和数据
+				var option = {
+					title: {
+						text: 'ECharts 入门示例'
+					},
+					tooltip: {//提示信息
+						
+					},
+					legend: {//说明:当鼠标悬停在每个柱上时,会显示
+						data: ['销量']
+					},
+					xAxis: {//x轴
+						data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+					},
+					yAxis: {},//柱状图一般y轴不需要,y轴内容会根据series中的data自适应生成
+					series: [{//系列,代表一副图
+						name: '销量',
+						type: 'bar',
+						data: [5, 20, 36, 10, 10, 20]//数据
+					}]
+				};
+
+				// 使用刚指定的配置项和数据显示图表。
+				myChart.setOption(option);
+			});
+		</script>
+	</head>
+
+	<body>
+		1.绘制一个简单的图表 在绘图前我们需要为 ECharts 准备一个具备高宽的 DOM 容器。<br>
+		<!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+		<div id="main" style="width: 600px;height:400px;"></div>
+	</body>
+
+</html>

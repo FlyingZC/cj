@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<title>日期范围选择测试页</title>
+		<link rel="stylesheet" href="bootstrap-custom/dist/css/bootstrap.css" />
+		<link rel="stylesheet" href="daterange/daterangepicker.css" />
+		<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+		<script type="text/javascript" src="js/moment.js"></script>
+		<script type="text/javascript" src="bootstrap-custom/dist/js/bootstrap.js"></script>
+		<script type="text/javascript" src="daterange/daterangepicker.js"></script>
+		<script>
+			$(function() {
+				window.log = console.log;
+				log(moment());
+				log(moment().subtract(1, 'days'));
+				//字符串设置日期
+				log(moment('1995-12-12'));
+				//字符串加格式 设置时间
+				log(moment("12-25-1995", "MM-DD-YYYY"));
+
+				//对象,指定每一个参数
+				moment({ hour: 15, minute: 10 });
+				log(moment({ y: 2010, M: 3, d: 5, h: 15, m: 10, s: 3, ms: 123 }));
+				moment({ year: 2010, month: 3, day: 5, hour: 15, minute: 10, second: 3, millisecond: 123 });
+				moment({ years: 2010, months: 3, days: 5, hours: 15, minutes: 10, seconds: 3, milliseconds: 123 });
+				moment({ years: 2010, months: 3, date: 5, hours: 15, minutes: 10, seconds: 3, milliseconds: 123 });
+				log(moment().seconds(30));
+				//秒
+				log(moment().seconds());
+				//毫秒
+				log(moment().milliseconds());
+
+				log(moment().minutes());
+				//单复数都可以
+				log(moment().hours());
+				//设置1-31天
+				log(moment().date());
+				//设置星期,星期天为0
+				log(moment().days());
+				//设置年中的每一天
+				log(moment().dayOfYear());
+				log(moment().year());
+				log();
+
+				//取值
+				moment().get('year');
+				moment().get('month'); // 0 to 11
+				moment().get('date');
+				moment().get('hour');
+				moment().get('minute');
+				moment().get('second');
+				moment().get('millisecond');
+
+				//赋值
+				moment().set('year', 2013);
+				moment().set('month', 3); // April
+				moment().set('date', 1);
+				moment().set('hour', 13);
+				moment().set('minute', 20);
+				moment().set('second', 30);
+				moment().set('millisecond', 123);
+
+				moment().set({ 'year': 2013, 'month': 3 });
+
+				//========操作
+				//加法
+				moment().add(7, 'days').add(1, 'months');
+				moment().add({ days: 7, months: 1 });
+				//减法
+				moment().subtract(7, 'days');
+
+				//设置为起始时间
+				moment().startOf('year'); // set to January 1st, 12:00 am this year
+				moment().startOf('month'); // set to the first of this month, 12:00 am
+				moment().startOf('quarter'); // set to the beginning of the current quarter, 1st day of months, 12:00 am
+				moment().startOf('week'); // set to the first day of this week, 12:00 am
+				moment().startOf('isoWeek'); // set to the first day of this week according to ISO 8601, 12:00 am
+				moment().startOf('day'); // set to 12:00 am today
+				moment().startOf('hour'); // set to now, but with 0 mins, 0 secs, and 0 ms
+				moment().startOf('minute'); // set to now, but with 0 seconds and 0 milliseconds
+				moment().startOf('second'); // same as moment().milliseconds(0);
+
+				//以下这一句相当于下一句
+				moment().startOf('year');
+				moment().month(0).date(1).hours(0).minutes(0).seconds(0).milliseconds(0);
+
+				//设置为结束时间
+				//moment().endOf(String);
+
+				//时差(以现在为基准)
+				log(moment([2007, 0, 29]).fromNow()); //11 years ago
+				log(moment([2007, 0, 29]).fromNow(true));
+
+				//显示===========格式化显示=============
+				moment().format();
+				//今天0点
+				log(moment().startOf('day'));
+				log(moment().endOf('day').format('YYYY-MM-DD HH:mm'));
+				log(moment().startOf('month').format('YYYY-MM-DD HH:mm'));
+				log(moment().startOf('year').format('YYYY-MM-DD HH:mm'));
+				moment().startOf('day').format('YYYY-MM-DD HH:mm');
+				log(getTimeInterval({pattern:"YYYY-MM-DD HH:mm"}));
+				log(getTimeInterval({pattern:"YYYY-MM-DD HH:mm:ss"}));
+				log(getTimeInterval({pattern:"YYYY-MM-DD"}));
+			});
+
+			var getTimeInterval = function(customObj) {
+				var elem = $("#timeInterval"),
+					pattern = "";
+				if(typeof customObj === 'object') {
+					if(customObj.elem) {
+						elem = customObj.elem;
+					}
+					if(customObj.pattern) {
+						pattern = customObj.pattern;
+					}
+				}
+				var timeIntervalArray = "2017-11-01 00:00至2017-12-13 23:59".split("至");
+				if(timeIntervalArray && timeIntervalArray.length == 2) {
+					if(pattern) {
+						for(var i = 0; i < timeIntervalArray.length; i++) {
+							timeIntervalArray[i] = moment(timeIntervalArray[i]).format(pattern);
+						}
+					}
+					return timeIntervalArray;
+				}
+				return ["", ""];
+			}
+		</script>
+	</head>
+
+	<body>
+
+	</body>
+
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../dist/css/select2.css">
+		<script src="../../js/jquery-2.0.3.js"></script>
+		<script src="../dist/js/select2.full.js"></script>
+		<script>
+			$(function() {
+				$("#tag").select2({
+					//language: 'zh-CN', //转为中文版
+					minimumInputLength: 1, //最少输入1个字符，否则不会自动查询
+					//escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+					placeholder: "标签", //默认显示文案：标签
+					ajax: {
+						url: "data.json",
+						dataType: 'json',
+						cache: true,
+						delay: 250,
+						data: function(params) {
+							/*var have_chose = "";
+							$.each($("#tag").find("option:selected"), function(key, val) {
+								have_chose += $(this).val() + ",";
+							});*/
+							return {
+								title: params.term, // search term
+								have_chose_ids: have_chose, //已经选择的不在查询
+								page: params.page //第几页返回查询
+							};
+						},
+						processResults: function(data, params) { //结果处理
+							params.page = params.page || 1;
+							return {
+								//results: (new Function("return " + data.items))(),
+								results: data.items,
+								pagination: {
+									more: (params.page * 30) < data.total_count //每页30条数据
+								}
+							}
+						}
+					}
+				});
+			});
+		</script>
+	</head>
+
+	<body>
+		<select id="tag" style="width:300px"></select>
+	</body>
+
+</html>

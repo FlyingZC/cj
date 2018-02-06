@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../../js/jquery-2.0.3.js"></script>
+		<!--dropzone.js不依赖jQuery-->
+		<script src="../dropzone/dropzone.js"></script>
+		<script>
+			$(function() {
+				//初始化方式1
+				$("#dropContainer").Dropzone({
+					url: "",
+					maxFiles: 10,
+					maxFilesize: 512,
+					acceptedFiles: ".js,.obj,.dae"
+				});
+				//初始化方式2
+				//可以使用new初始化
+				/*var dropz = new Dropzone("#dropz", {
+					url: "handle-upload.php",
+					maxFiles: 10,
+					maxFilesize: 512,
+					acceptedFiles: ".js,.obj,.dae"
+				});*/
+				//dropzone不含服务端支持,和表单中的 <input type="file" name="file">类似
+			});
+		</script>
+	</head>
+
+	<body>
+		<div id="dropContainer"></div>
+	</body>
+
+</html>

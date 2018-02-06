@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../dist/css/select2.css">
+		<script src="../../js/jquery-2.0.3.js"></script>
+		<script src="../dist/js/select2.full.js"></script>
+	</head>
+
+	<body>
+		单选
+		<select id="c01-select"></select>
+		<br><br>
+			ajax
+		<select id="c02-select" style="width:300px"></select>
+		<br><br>
+			多选
+		<select id="sel_menu2" multiple="multiple" class="form-control">
+			<optgroup label="系统设置">
+				<option value="1">用户管理</option>
+				<option value="2">角色管理</option>
+				<option value="3">部门管理</option>
+				<option value="4">菜单管理</option>
+			</optgroup>
+			<optgroup label="订单管理">
+				<option value="5">订单查询</option>
+				<option value="6">订单导入</option>
+				<option value="7">订单删除</option>
+				<option value="8">订单撤销</option>
+			</optgroup>
+			<optgroup label="基础数据">
+				<option value="9">基础数据维护</option>
+			</optgroup>
+		</select>
+
+		<br> 图文结合
+		<br>
+
+		<select id="sel_menu4" class="js-example-templating js-states form-control" style="width:300px">
+			<optgroup label="系统设置">
+				<option value="1">用户管理</option>
+				<option value="2">角色管理</option>
+				<option value="3">部门管理</option>
+				<option value="4">菜单管理</option>
+			</optgroup>
+			<optgroup label="订单管理">
+				<option value="5">订单查询</option>
+				<option value="6">订单导入</option>
+				<option value="7">订单删除</option>
+				<option value="8">订单撤销</option>
+			</optgroup>
+			<optgroup label="基础数据">
+				<option value="9">基础数据维护</option>
+			</optgroup>
+		</select>
+		<br><br>
+			<button id="btn1">按钮1</button>
+	</body>
+	<script>
+		//例1
+		var data = [{
+			id:"-1000",
+			text:"无id"
+		},{
+			id: 0,
+			text: 'enhancement'
+		}, {
+			id: 1,
+			text: 'bug'
+		}, {
+			id: 2,
+			text: 'duplicate'
+		}, {
+			id: 3,
+			text: 'invalid'
+		}, {
+			id: 4,
+			text: 'wontfix'
+		}];
+		$("#c01-select").select2({
+			data: data,
+			placeholder: '请选择',
+			//允许用户 清空选择
+			allowClear: true
+		});
+
+		//例2:ajax
+		var formatRepo = function(data) {
+			return data.text + "哈哈";
+		}
+		var formatRepoSelection = function(data) {
+			return data.text + "呵呵";
+		}
+		$("#c02-select").select2({
+			ajax: {
+				//若要指定select2宽度,直接在html中style中写
+				url: "data.json",
+				dataType: 'json',
+				delay: 250,
+				data: function(params) {
+					debugger;
+					return {
+						//查询参数(params.term表示输入框中的内容,q表示发送到服务器的参数名)
+						//q: params.term,
+						//发送http://127.0.0.1:8020/cj/09select2/dist/data.json?text=2
+						text: params.term
+					};
+				},
+				processResults: function(res,params) {
+					return {
+						//results为最终的数据,如data.result
+						results: res,
+						pagination:{
+							more:res
+						}
+					};
+				},
+				cache: true
+			},
+			escapeMarkup: function(markup) {
+				return markup;
+			},
+			//最少需要输入多少个字符才进行查询
+			minimumInputLength: 1,
+			//返回结果回调函数
+			templateResult: formatRepo,
+			//选中项回调
+			templateSelection: formatRepoSelection
+		});
+
+		//例3:多选
+		//多选,在select元素上添加multiple="multiple"属性即可
+		$("#sel_menu2").select2({
+			tags: true,
+			maximumSelectionLength: 3 //最多能够选择的个数
+		});
+
+		//例4:图文结合
+		var formatState = function(state) {
+			debugger;
+			if(!state.id) {
+				return state.text;
+			}
+			var $state = $(
+				'<span><img src="a.png" class="img-flag" /> ' + state.text + '</span>'
+			);
+			return $state;
+		};
+		//例4:带图片
+		$("#sel_menu4").select2({
+			templateResult: formatState,
+			templateSelection: formatState
+		});
+
+		//5.获取选中项
+		$("#btn1").click(function() {
+
+		});
+	</script>
+
+</html>

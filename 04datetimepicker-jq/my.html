@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<!--注意引入的这三个文件的真实路径-->
+		<link rel="stylesheet" type="text/css" href="source/jquery.datetimepicker.css" />
+		<script src="source/jquery.js"></script>
+		<script src="build/jquery.datetimepicker.full.js"></script>
+		<script>
+			$(function() {
+				$.datetimepicker.setLocale('ch'); //设置中文,必须设置此句后面才为中文
+				$("#dateInput").datetimepicker();
+				$("#dateInput2").datetimepicker({ lang: 'ch' });
+				$('#dateInput3').datetimepicker({
+					lang: "ch", //语言选择中文 注：旧版本 新版方法：$.datetimepicker.setLocale('ch');
+					format: "Y-m-d", //格式化日期
+					timepicker: false, //关闭时间选项
+					yearStart: 2000, //设置最小年份
+					yearEnd: 2020, //设置最大年份
+					todayButton: false //关闭选择今天按钮
+				});
+			});
+		</script>
+	</head>
+
+	<body>
+		默认<input type="text" id="dateInput" /><br>
+		设置中文<input type="text" id="dateInput2" /><br>
+		更多设置<input type="text" id="dateInput3" /><br>
+	</body>
+
+</html>

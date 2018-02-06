@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>分页查询后台数据,每次滑动加载下一页</title>
+		<link rel="stylesheet" href="../dist/css/select2.css">
+		<script src="../../js/jquery-2.0.3.js"></script>
+		<script src="../dist/js/select2.full.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				$("#select2Container").each(function() {
+					var $this = $(this);
+					$this.select2({
+						//language: "zh-CN", // 指定语言为中文，国际化才起效
+						//inputMessage: "请输入", // 添加默认参数
+						ajax: {
+							url: 'pageData.json',
+							dataType: 'json',
+							delay: 250, // 延迟显示
+							//data用于向后台发送的请求参数
+							//params是select2用于存储例如 当前搜索框中的内容(params.term),或者分页数等参数的对象(params.page)
+							data: function(params) {
+								return {
+									//会向后台发送pageData.json? username=xx&currPage=xx&pageSize=xx的请求
+									username: params.term, // 搜索框内输入的内容，传递到Java后端的parameter为username
+									currPage: params.page, // 第几页，分页
+									pageSize: 10 // 每页显示多少行
+								};
+							},
+							// 分页,select查询返回结构.data为后台返回数据,
+							//params为select2保存参数的对象,params.page在请求第一页时该属性不存在!!!,
+							//但是随后滚动下拉该属性select2会自动赋值为当前是第几页的数值
+							processResults: function(data, params) {
+								//在第一次请求时没有params.page属性,所以初始化为1
+								params.page = params.page || 1;
+								//可以在此对后台返回的数据转换成select所需的id,text格式				
+								/*if(res.success) {
+									var users = res.result.data;
+									var options = [];
+									for(var i = 0, len = users.length; i < len; i++) {
+										var option = {
+											"id": users[i]["userId"],
+											"text": (users[i]["departmentName"] + " " + users[i]["realName"] + " " + users[i]["position"])
+										};
+										options.push(option);
+									}
+								}*/
+
+								return {
+									results: data.data, // 后台返回的数据集,一个类似于[{'id':1,'text':2},{'id':2,'text':2}]的数据
+									//下拉触发分页查询的条件
+									pagination: {
+										more: params.page < data.total // 总页数为10，那么1-9页的时候都可以下拉刷新
+									}
+								};
+							},
+							cache: false
+						},
+
+						escapeMarkup: function(markup) {
+							return markup;
+						}, // let our custom formatter work
+						minimumInputLength: 1, // 最少输入一个字符才开始检索
+						templateResult: function(repo) { // 显示的结果集格式，这里需要自己写css样式，可参照demo
+							// 正在检索
+							if(repo.loading)
+								return repo.text;
+
+							var markup = repo.username;
+
+							markup += repo.realname;
+
+							var markup = "<div class='select2-result-repository clearfix'>" + "<div class='select2-result-repository__avatar'><img src='" +
+								repo.headimgUrl + "' /></div>" + "<div class='select2-result-repository__meta'>" +
+								"<div class='select2-result-repository__title'>" + repo.username + "</div>";
+
+							if(repo.realname) {
+								markup += "<div class='select2-result-repository__description'>" + repo.realname + "</div>";
+							}
+
+							markup += "<div class='select2-result-repository__statistics'>" +
+								"<div class='select2-result-repository__forks'><i class='fa fa-user'></i> 下级会员数" + repo.children_count + " </div>" +
+								"</div>" + "</div></div>";
+
+							return markup;
+						},
+						templateSelection: function(repo) {
+							return repo.realname || repo.text;
+						} // 列表中选择某一项后显示到文本框的内容
+					});
+
+				});
+			});
+		</script>
+	</head>
+
+	<body>
+		<select id="select2Container" style="width:300px"></select>
+	</body>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../media/css/jquery.dataTables.css">
+		<script src="../../js/jquery-2.0.3.js"></script>
+		<script type="text/javascript" language="javascript" src="../media/js/jquery.dataTables.js">
+		</script>
+		<script>
+			//使用对象 做 数据源
+			var data = [{
+					"name": "Tiger Nixon",
+					"position": "System Architect",
+					"salary": "$3,120",
+					"start_date": "2011/04/25",
+					"office": "Edinburgh",
+					"extn": "5421"
+				},
+				{
+					"name": "Garrett Winters",
+					"position": "Director",
+					"salary": "$5,300",
+					"start_date": "2011/07/25",
+					"office": "Edinburgh",
+					"extn": "8422"
+				}
+			];
+			//object可以如下初始化表格
+			$(function() {
+				$('#example').DataTable({
+					data: data,
+					//使用对象数组，一定要配置columns，告诉 DataTables 每列对应的属性
+					//data 这里是固定不变的，name，position，salary，office 为你数据里对应的属性
+					columns: [
+						{ data: 'name' },
+						{ data: 'position' },
+						{ data: 'salary' },
+						{ data: 'office' }
+					]
+				});
+			});
+		</script>
+	</head>
+
+	<body>
+		<table id="example">
+			<thead>
+				<tr>
+					<th>Column 1</th>
+					<th>Column 2</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Row 1 Data 1</td>
+					<td>Row 1 Data 2</td>
+				</tr>
+				<tr>
+					<td>Row 2 Data 1</td>
+					<td>Row 2 Data 2</td>
+				</tr>
+			</tbody>
+		</table>
+	</body>
+
+</html>

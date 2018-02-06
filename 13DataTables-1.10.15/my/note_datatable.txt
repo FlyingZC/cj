@@ -1,0 +1,16 @@
+0.jquery.dataTables-my.js中 包含自己的注释
+
+1.DataTables处理数据的三个核心概念
+(1)处理模式:对于(排序,搜索,分页)
+	-客户端处理,浏览器端逻辑分页
+	-服务器端处理,服务器端分页
+	
+(2)数据源类型
+使用数组,对象,实例 等
+
+(3)数据源
+DOM,JavaScript,Ajax
+若DataTables初始化后,它会自动检查表格中的数据,若存在即作为表显示的数据(此时data或ajax数据不显示)
+此时DataTables用于渲染已存在的table
+
+
